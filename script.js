@@ -1,4 +1,4 @@
-// "use strict";
+"use strict"
 let money;
 money = prompt("Ваш месячный доход?");
 console.log (money);
