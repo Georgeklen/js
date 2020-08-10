@@ -21,7 +21,7 @@ mission = mission / budgetMonth;
 console.log (Math.ceil(mission));
 let budgetDay;
 budgetDay = budgetMonth / 30;
-console.log (Math.floor(budgetMonth));
+console.log (Math.floor(budgetDay));
 if (budgetDay >= 1200) {
     alert ("У вас высокий уровень дохода!")
 } else if (budgetDay >1200 || budgetDay>=600) {
@@ -31,3 +31,4 @@ if (budgetDay >= 1200) {
 } else  {
  alert("Что то пошло не так")
 }
+
