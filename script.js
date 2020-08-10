@@ -1,4 +1,3 @@
-
 "use strict";
 let money = prompt("Ваш месячный доход?");
 console.log (money);
@@ -12,9 +11,7 @@ let expensesTwo = prompt ("Введите обязательную статью 
 console.log (expensesOne);
 console.log (expensesTwo);
 let amountOne = prompt ("Во сколько это обойдется?");
-
 let amountTwo = prompt ("Во сколько это обойдется?");
-console.log (amountTwo);
 let budgetMonth;
 budgetMonth = money - (Number (amountOne) + Number (amountTwo));
 console.log(typeof budgetMonth)
@@ -23,12 +20,8 @@ let mission = 50000;
 mission = mission / budgetMonth;
 console.log (Math.ceil(mission));
 let budgetDay;
-budgetMonth = budgetMonth / 30;
+budgetDay = budgetMonth / 30;
 console.log (Math.floor(budgetMonth));
-
-
-
-budgetDay = prompt ("Какой у вас дневной бюджет?")
 if (budgetDay >= 1200) {
     alert ("У вас высокий уровень дохода!")
 } else if (budgetDay >1200 || budgetDay>=600) {
