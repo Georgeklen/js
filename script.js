@@ -1,6 +1,5 @@
 "use strict";
-let money;
-money = prompt("Ваш месячный доход?");
+let money = prompt("Ваш месячный доход?");
 console.log (money);
 let addExpenses = prompt ("Перечислите возможные расходы за рассчитываемый период через запятую");
 console.log (addExpenses.split(",  "));
@@ -16,7 +15,7 @@ console.log (amountOne);
 let amountTwo = prompt ("Во сколько это обойдется?");
 console.log (amountTwo);
 let budgetMonth;
-budgetMonth = money - amountTwo;
+budgetMonth = money *(amountOne + amountTwo);
 console.log(`Бюджет на месяц = ${budgetMonth}`);
 let mission = 50000;
 mission = mission / budgetMonth;
@@ -30,15 +29,11 @@ console.log (Math.floor(budgetMonth));
 budgetDay = prompt ("Какой у вас дневной бюджет?")
 if (budgetDay >= 1200) {
     alert ("У вас высокий уровень дохода!")
-}
-
-else if (budgetDay >1200 || budgetDay>=600) {
+} else if (budgetDay >1200 || budgetDay>=600) {
     alert("У вас средний уровень дохода")
-}
-else if (0 < budgetDay && budgetDay < 600){
+} else if (0 < budgetDay && budgetDay < 600){
     alert("К сожалению у вас уровень дохода ниже среднего");
-}
-
-else  {
+} else  {
  alert("Что то пошло не так")
 }
+
