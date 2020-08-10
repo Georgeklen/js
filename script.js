@@ -15,7 +15,7 @@ console.log (amountOne);
 let amountTwo = prompt ("Во сколько это обойдется?");
 console.log (amountTwo);
 let budgetMonth;
-budgetMonth =(amountOne + amountTwo);
+budgetMonth = money-(amountOne + amountTwo);
 console.log(`Бюджет на месяц = ${budgetMonth}`);
 let mission = 50000;
 mission = mission / budgetMonth;
