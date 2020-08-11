@@ -11,7 +11,7 @@ let money = prompt("Ваш месячный доход?");
 // console.log (expensesOne);
 // console.log (expensesTwo);
 
-// let budgetMonth;
+
 // budgetMonth = money - (Number (amountOne) + Number (amountTwo));
 // console.log(typeof budgetMonth)
 // console.log(`Бюджет на месяц = ${budgetMonth}`);
@@ -34,21 +34,31 @@ mission = 50000;
 
 let amountOne = prompt ("Во сколько это обойдется?");
 let amountTwo = prompt ("Во сколько это обойдется?");
-let sum  = function () {
- console.log ( Number(amountOne) + Number(amountTwo));
+let getExpensesMonth  = function () {
+ return ( Number(amountOne) + Number(amountTwo));
 }
-sum();
+console.log (getExpensesMonth())
 
 let getAccumulatedMonth = function (){
-   console.log ( money - (Number (amountOne) + Number (amountTwo) )) 
+   return ( money - (Number (amountOne) + Number (amountTwo) )) 
 }
 
-getAccumulatedMonth();
+console.log (getAccumulatedMonth());
 
 
 let accumulatedMonth = getAccumulatedMonth();
 
+
+
 let getTargetMonth = function () {
-    console.log  (Number ( mission / getAccumulatedMonth))
+    return  (Number (mission)  /  Number(accumulatedmonth))
 }
-getTargetMonth()
+console.log(mission)
+console.log (typeof(mission))
+ console.log (getTargetMonth())
+
+let budgetDay = function () {
+    return ("getAccumulatedMonth" / 31)
+    
+}
+ 
