@@ -31,34 +31,52 @@ mission = 50000;
 // } else  {
 //  alert("Что то пошло не так")
 // }
+// //}
+
 
 let amountOne = prompt ("Во сколько это обойдется?");
 let amountTwo = prompt ("Во сколько это обойдется?");
 let getExpensesMonth  = function () {
  return ( Number(amountOne) + Number(amountTwo));
 }
-console.log (getExpensesMonth())
 
+console.log (getExpensesMonth())
+console.log (typeof(getExpensesMonth()))
 let getAccumulatedMonth = function (){
    return ( money - (Number (amountOne) + Number (amountTwo) )) 
 }
 
 console.log (getAccumulatedMonth());
-
+console.log (typeof(getAccumulatedMonth()))
 
 let accumulatedMonth = getAccumulatedMonth();
 
 
 
 let getTargetMonth = function () {
-    return  (Number (mission)  /  Number(accumulatedmonth))
+    return  (Number (mission)  /  Number(accumulatedMonth))
 }
-console.log(mission)
-console.log (typeof(mission))
  console.log (getTargetMonth())
+ console.log (typeof(getTargetMonth()))
 
 let budgetDay = function () {
-    return ("getAccumulatedMonth" / 31)
-    
-}
+    return ( accumulatedMonth / 30)
  
+}
+
+console.log (budgetDay())
+console.log (typeof(budgetDay()))
+
+function getStatusIncome() {
+   if (budgetDay >= 1200) {
+   return("У вас высокий уровень дохода!")
+} else if (budgetDay >1200 || budgetDay>=600) {
+   return("У вас средний уровень дохода")
+} else if (0 < budgetDay && budgetDay < 600){
+    return("К сожалению у вас уровень дохода ниже среднего");
+} else  {
+ return("Что то пошло не так")
+}
+}
+console.log(getStatusIncome())
+console.log (typeof(getStatusIncome()))
