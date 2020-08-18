@@ -3,7 +3,7 @@ const budgetDay = 3000;
 const income = "фриланс";
 const addExpenses = 'Такси, Интернет, Коммуналка.';
 alert(addExpenses);
-let deposit = true ; // выведится true
+const deposit = true ; // выведится true
 const mission = 30000;
 const period = 1;
 console.log(typeof money,typeof income,typeof deposit);
