@@ -2,7 +2,7 @@
 let money = prompt("Ваш месячный доход?");
 console.log (money);
 let addExpenses = prompt ("Перечислите возможные расходы за рассчитываемый период через запятую");
-console.log (addExpenses.split(",  "));
+console.log (addExpenses.split(","));
 let deposit;
 deposit = confirm ("У вас есть депозит в банке?");
 console.log (deposit);
@@ -14,14 +14,16 @@ let amountOne = prompt ("Во сколько это обойдется?");
 let amountTwo = prompt ("Во сколько это обойдется?");
 let budgetMonth;
 budgetMonth = money - (Number (amountOne) + Number (amountTwo));
-console.log(typeof budgetMonth)
 console.log(`Бюджет на месяц = ${budgetMonth}`);
 let mission = 50000;
-mission = mission / budgetMonth;
-console.log (Math.ceil(mission));
+console.log("Цель заработать " + mission)
+const  period  =  1 ;
+console.log("Период равен " + period + " месяц")
+mission =+(mission / budgetMonth);
+console.log  (`Цель будет достигнута = ${Math.ceil (mission)}`);
 let budgetDay;
 budgetDay = budgetMonth / 30;
-console.log (Math.floor(budgetDay));
+console.log(`Бюджет на день = ${Math.floor (budgetDay)}`)
 if (budgetDay >= 1200) {
     alert ("У вас высокий уровень дохода!")
 } else if (budgetDay >1200 || budgetDay>=600) {
@@ -31,4 +33,3 @@ if (budgetDay >= 1200) {
 } else  {
  alert("Что то пошло не так")
 }
-
