@@ -2,49 +2,46 @@
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+let isString = function(b) {
+    return isNaN(parseFloat(b)) && isFinite(b);
+}
 let money;
-// console.log (money);
-let addExpenses = prompt ("Перечислите возможные расходы за рассчитываемый период через запятую");
-console.log (addExpenses.split(",  "));
-let deposit;
-deposit = confirm ("У вас есть депозит в банке?");
-console.log (deposit);
-// let expensesOne = prompt ("Введите обязательную статью расходов?");
-// let expensesTwo = prompt ("Введите обязательную статью расходов?");
-
-let amountOne , amountTwo;
-let expensesOne , expensesTwo;
-let mission = 50000;
-console.log ("Ваша миссия = " +(Math.ceil(mission)));
-let budgetDay;
-
-
 let start;
 do {
     money = prompt("Ваш месячный доход?");
   } while (!isNumber(money))
   console.log("Ваш доход = " + money)
 
+let addExpenses = prompt ("Перечислите возможные расходы за рассчитываемый период через запятую");
+console.log (addExpenses.split(",  "));
+let deposit;
+deposit = confirm ("У вас есть депозит в банке?");
+console.log (deposit);
+let amount;
+let expenses;
+let mission = 50000;
+console.log ("Ваша миссия = " +(Math.ceil(mission)));
+let budgetDay;
 
 let getExpensesMonth  = function () {
     let sum = 0;
-
     for (let i = 0; i < 2; i++) {
-        let guard;
+       do {
+            expenses = prompt ("Введите обязательную статью расходов?");
+        }  
+        while (isString(expenses))
+
+        sum += +expenses
         do {
-            expensesOne = prompt ("Введите обязательную статью расходов?");
-        } while (!isNumber(expensesOne))
-// if ( i=== 0) {
-//     expensesOne = prompt ("Введите обязательную статью расходов?");
-
-// } else if ( i === 1) {
-//     expensesTwo = prompt ("Введите обязательную статью расходов?")
-// }
-
-
-
-            sum+= +prompt("Во сколько это обойдется?")
+            amount = prompt ("Во сколько это обойдется?");
+        } while (!isNumber(amount))
+                
+        sum += +amount;
+        
     }
+
+
+
     console.log("Ваши затраты = " + sum)
     return sum;
    }
@@ -73,8 +70,6 @@ let getTargetMonth = function () {
     console.log ("Цель будет достигнута за = " + (Math.floor(getTargetMonth())))
 }
     getTargetMonth()
-
-//  console.log ("Период выполнения миссии = " + (getTargetMonth()))
 
  function getStatusIncome() {
  if (accumulatedMonth >= 1200) {
