@@ -31,7 +31,7 @@ let getExpensesMonth  = function () {
         }  
         while (isString(expenses))
 
-        sum += +expenses
+        // sum += +expenses
         do {
             amount = prompt ("Во сколько это обойдется?");
         } while (!isNumber(amount))
