@@ -67,7 +67,7 @@ do {
       }
   }
   appData.asking();
-console.log ("Ваши затраты = " +  appData.result)
+console.log ("Ваши затраты = " + appData.getExpensesMonth())
 
 let amount;
 console.log ("Ваша миссия = " +(Math.ceil(appData.mission)));
@@ -94,7 +94,7 @@ let getTargetMonth = function () {
         console.log ("Цель не будет достигнута.")
     }
     else if (getTargetMonth() > 0)
-    console.log ("Цель будет достигнута за = " + (Math.floor(getTargetMonth())))
+    console.log ("Цель будет достигнута за = " + (Math.ceil(getTargetMonth())))
 }
     getTargetMonth()
 
@@ -110,3 +110,8 @@ let getTargetMonth = function () {
 }
 }
 console.log(getStatusIncome())
+
+
+for (let key in appData) {
+    console.log("Наша программа включает в себя данные:  "  + key + "   Значение  " + appData[key] )
+}
