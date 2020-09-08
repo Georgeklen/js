@@ -1,0 +1,23 @@
+let adv = document.querySelector(".adv")
+adv.remove()
+document.body.style.background = "url(image/you-dont-know-js.jpg)"
+let oneBook = document.querySelectorAll(".book")
+let a = document.querySelectorAll("a")
+let liZ = oneBook[0].querySelectorAll("li")
+let liT = oneBook[5].querySelectorAll("li")
+let lif = oneBook[2].querySelectorAll("li")
+let newElem = document.createElement("li")
+a[4].textContent = "Книга 3. this и Прототипы Объектов";
+oneBook[1].after(oneBook[0])
+oneBook[4].after(oneBook[2])
+oneBook[4].after(oneBook[3])
+oneBook[5].after(oneBook[2])
+liZ[10].prepend(liZ[2])
+liZ[3].append(liZ[6])
+liZ[4].prepend(liZ[8])
+liT[1].append(liT[9])
+liT[1].append(liT[3])
+liT[2].prepend(liT[4])
+liT[7].append(liT[5])
+newElem.textContent = "Глава 8: За пределами ES6"
+lif[8].insertAdjacentElement("beforeend", newElem)
