@@ -27,7 +27,7 @@ let salaryAmount = document.querySelector(".salary-amount");
 let expensesItems = document.querySelectorAll(".expenses-items");
 let additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0];
 let incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
-let incomeItem = document.querySelectorAll('income-items');
+let incomeItems = document.querySelectorAll('.income-items');
 //
 
 let isNumber = function(n) {
@@ -36,8 +36,7 @@ let isNumber = function(n) {
 let isString = function(b) {
     return isNaN(parseFloat(b)) && isFinite(b);
 }
-// let money;
-
+start.disabled=true;
   let appData = {
       amount: 0,
       incomeMonth: 0,
@@ -54,10 +53,7 @@ let isString = function(b) {
       deposit: false,
       period: 3,
       start: function() {
-        if (salaryAmount.value === '') {
-          alert ("Введите что-нибудь!")
-        }
-     appData.budget = salaryAmount.value;
+     appData.budget = +salaryAmount.value;
      appData.getExpenses()
      appData.getExpensesMonth()
      appData.getAddExpenses()
@@ -65,6 +61,8 @@ let isString = function(b) {
      appData.getIncome()
      appData.getBudget()
      appData.showResult()
+     salaryAmount.value='';
+     start.disabled=true;
     // appData.getInfoDeposit()
       },
       showResult: function() {
@@ -75,7 +73,7 @@ let isString = function(b) {
         additionalIncomeValue.value = appData.addIncome.join(', ')
         targetMonthValue.value = Math.ceil(appData.getTargetMonth())
         incomePeriodValue.value = appData.calcPeriod()
-
+        periodSelect.addEventListener('input',appData.showResult)
       },
 
       addExpensesBlock: function() {
@@ -86,7 +84,16 @@ let isString = function(b) {
           expensesPlus.style.display = 'none'
         }
       },
-      
+
+      addIncomeBlock:function(){
+        let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
+        incomeItems = document.querySelectorAll('.income-items');
+        if(incomeItems.length === 3){
+            incomePlus.style.display='none';
+        }
+    },
+
       getAddExpenses: function() {
         let addExpenses = additionalExpensesItem.value.split(', ')
         addExpenses.forEach(function(item) {
@@ -114,26 +121,15 @@ let isString = function(b) {
           }
         })
       },
-      getIncome: function() {
-        let cashIncome; 
-        let itemIncome;
-        do {
-           let itemIncome = prompt ("Какой у вас есть дополнительный зарабаток?", "Таксую") 
-        } while (isString(itemIncome))
-            
-
-        do {
-            cashIncome = prompt ("Какую сумму вы зарабатываете?", 15000)
-        }while(!isNumber(appData.income[itemIncome] = cashIncome));
-         
-        appData.income[itemIncome] = cashIncome;
-
-        for (let  key in appData.income) {
-          appData.incomeMonth += +appData.income[key]
-        }
-
-
-      },
+      getIncome:function(){
+        incomeItems.forEach(function(item){
+            let itemIncome = item.querySelector('.income-title').value;
+            let cashIncome = item.querySelector('.income-amount').value;
+            if(itemIncome!==''&&cashIncome!==''){
+                appData.income[itemIncome]=cashIncome;
+            }
+        });
+    },
 
       getExpensesMonth: function() {
         for (let key in appData.expenses) {
@@ -154,47 +150,46 @@ let isString = function(b) {
       
       getStatusIncome: function() {
         if (appData.budgetDay >= 1200) {
-			return ('У вас высокий уровень дохода');
+			return ('РЈ РІР°СЃ РІС‹СЃРѕРєРёР№ СѓСЂРѕРІРµРЅСЊ РґРѕС…РѕРґР°');
 		} else if (appData.budgetDay >= 600 || appData.budgetDay < 1200) {
-			return ('У вас средний уровень дохода');
+			return ('РЈ РІР°СЃ СЃСЂРµРґРЅРёР№ СѓСЂРѕРІРµРЅСЊ РґРѕС…РѕРґР°');
 		} else if (appData.budgetDay < 600 && appData.budgetDay === 0) {
-			return ('К сожалению у вас уровень дохода ниже среднего');
+			return ('Рљ СЃРѕР¶Р°Р»РµРЅРёСЋ Сѓ РІР°СЃ СѓСЂРѕРІРµРЅСЊ РґРѕС…РѕРґР° РЅРёР¶Рµ СЃСЂРµРґРЅРµРіРѕ');
 		} else {
-			return ('Что то пошло не так');
+			return ('Р§С‚Рѕ С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє');
 		}
       },
       getInfoDeposit: function() {
           if(appData.deposit) {
             do {
-                appData.percentDeposit = prompt("Какой годовой процент?", 10)
+                appData.percentDeposit = prompt("РљР°РєРѕР№ РіРѕРґРѕРІРѕР№ РїСЂРѕС†РµРЅС‚?", 10)
               } while (!isNumber(appData.percentDeposit))
               do {
-                appData.moneyDeposit = prompt("Какаяя сумма заложенна" , 10000)
+                appData.moneyDeposit = prompt("РљР°РєР°СЏСЏ СЃСѓРјРјР° Р·Р°Р»РѕР¶РµРЅРЅР°" , 10000)
               } while (!isNumber(appData.moneyDeposit))
             }
       }, 
       calcPeriod: function() {
           return (appData.budgetMonth * periodSelect.value);
+      },
+      range: function(){
+        let periodAmount = document.querySelector('.period-amount');
+        periodAmount.textContent= periodSelect.value;
+    },
+
+    disabledButton: function(){
+      if (salaryAmount.value.trim()!==''){
+          start.disabled=false;
+      }else{
+          start.disabled=true;
       }
   }
+ 
+}
+  
 
   start.addEventListener('click', appData.start)
-
   expensesPlus.addEventListener('click', appData.addExpensesBlock)
-
-// console.log ("Ваши затраты = " + appData.getExpensesMonth())
-// if (appData.getTargetMonth() > 0) {
-// 	console.log('Цель будет достигнута за ' + appData.getTargetMonth());
-// } else if(appData.getTargetMonth() < 0) {
-// 	console.log('Цель не будет достигнута');
-// }
-
-// for (let key in appData) {
-//     console.log("Наша программа включает в себя данные:  "  + key + "   Значение  " + appData[key] )
-// }
-function checkAddExpenses() {
-    for (let key of appData.addExpenses) {
-        key = word.charAt(0).toUpperCase();
-    }
-    
-}
+  incomePlus.addEventListener('click',appData.addIncomeBlock); 
+  periodSelect.addEventListener('input',appData.range); 
+  salaryAmount.addEventListener('input',appData.disabledButton);
