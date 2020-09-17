@@ -1,34 +1,32 @@
 'use strict'
-//
+
 const todoControl = document.querySelector('.todo-control');
 const headerInput = document.querySelector('.header-input');
-const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 const headerButton = document.querySelector(".header-button")
 const todoItem = document.querySelector(".todo-item")
-
-
+// const todoList  = document.querySelector(".todo")
+const todo  = document.querySelector(".todo")
 
 // headerButton.disabled=true
-const todoData = [];
+let todoData = [];
 
-const render = function () {
-    
-	todoList.textContent = '';
+if (localStorage.getItem('todo')) {
+    todoData = JSON.parse(localStorage.getItem('todo'));
+    render();
+}
+function render () {
+
+	todo.textContent = '';
 	todoCompleted.textContent = '';
 
-
 	todoData.forEach(function (item) {
+        
 		console.log(item)
 		//обнулил инпут
         headerInput.value = '';
         // localStorage
-        let todos;
-        function toLocal() {
-         todos = todoData.innerHTML
-         localStorage.setItem("todoData", todoData)
         
-        } 
 
 		const li = document.createElement('li');
 		li.classList.add('todo-item')
@@ -46,7 +44,7 @@ const render = function () {
                 todoCompleted.append(li);
                 
 			} else {
-                todoList.append(li);
+                todo.append(li);
                 headerInput.value = '';
                 // headerButton.disabled=true;
             }
@@ -61,24 +59,29 @@ const render = function () {
         //     }
         // }
         
-        toLocal()
+        
         // выполнение элемента
+        
+
 		const btnTodoCompleted = li.querySelector('.todo-complete');
 		btnTodoCompleted.addEventListener('click', function () {
-			item.completed = !item.completed;
+            item.completed = !item.completed;
+            localStorage.setItem('todo', JSON.stringify(todoData));
             render()
-            toLocal()
+            
         })
         
+        
 // удаление элемента
-		const btnTodoRemove = li.querySelector('.todo-remove');
+        const btnTodoRemove = li.querySelector('.todo-remove');
 		btnTodoRemove.addEventListener('click', function () {
 			let i = todoData.indexOf(item);
 			if (i >= 0) {
 				todoData.splice(i, 1);
-			}
+            }
+            localStorage.setItem('todo', JSON.stringify(todoData));
             render();
-            toLocal()
+            
 		})
     });
     
@@ -86,17 +89,14 @@ const render = function () {
 
 todoControl.addEventListener('submit', function (event) {
 	event.preventDefault();
-
 	const newTodo = {
 		value: headerInput.value,
 		completed: false
-	}
-	todoData.push(newTodo)
+    }
+    todoData.push(newTodo)
+    localStorage.setItem('todo', JSON.stringify(todoData));
     render();
     
 })
-if (localStorage.getItem("todos")) {
-    todoData.innerHTML = localStorage.getItem('todos')
-}
 
-render()
+
