@@ -29,7 +29,8 @@ let additionalIncomeValue = document.getElementsByClassName('additional_income-v
 let incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
 let incomeItems = document.querySelectorAll('.income-items');
 let incomeItem = document.querySelectorAll(".income-items")
-
+let main = document.querySelector('.main');
+let cancel = document.querySelector('#cancel')
 //
 
 let isNumber = function(n) {
@@ -55,30 +56,31 @@ start.disabled=true;
       deposit: false,
       period: 3,
       start: function() {
-     appData.budget = +salaryAmount.value;
-     appData.getExpenses()
-     appData.getExpensesMonth()
-     appData.getAddExpenses()
-     appData.getaddIncome()
-     appData.getIncome()
-     appData.getBudget()
-     appData.toDisabled()
-     appData.reset()
-     appData.showResult()
-     salaryAmount.value='';
-     start.disabled=true;
+      this.budget = +salaryAmount.value;
+      this.getExpenses()
+      this.getExpensesMonth()
+      this.getAddExpenses()
+      this.getaddIncome()
+      this.getIncome()
+      this.getBudget()
+      this.toDisabled()
+      this.reset()
+      this.showResult()
+      this.showResetButton()
+     
+    //  start.disabled=true;
 
     // appData.getInfoDeposit()
       },
       showResult: function() {
-        budgetMonthValue.value = +appData.budgetMonth;
-        budgetDayValue.value = +appData.budgetDay;
-        expensesMonthValue.value = +appData.expensesMonth;
-        additionalExpensesValue.value = appData.addExpenses.join(', ')
-        additionalIncomeValue.value = appData.addIncome.join(', ')
-        targetMonthValue.value = Math.ceil(appData.getTargetMonth())
-        incomePeriodValue.value = appData.calcPeriod()
-        periodSelect.addEventListener('input',appData.showResult)
+        budgetMonthValue.value = + this.budgetMonth;
+        budgetDayValue.value = + this.budgetDay;
+        expensesMonthValue.value = + this.expensesMonth;
+        additionalExpensesValue.value =  this.addExpenses.join(', ')
+        additionalIncomeValue.value = this.addIncome.join(', ')
+        targetMonthValue.value = Math.ceil(this.getTargetMonth())
+        incomePeriodValue.value = this.calcPeriod()
+        periodSelect.addEventListener('input',this.showResult)
 
 
         periodSelect.addEventListener('input', function(){
@@ -195,6 +197,7 @@ start.disabled=true;
           start.disabled=true;
       }
   },
+
   toDisabled: function(isDisabled = false) {
     salaryAmount.disabled = isDisabled;
     additionalIncomeItem[0].disabled = isDisabled
@@ -214,25 +217,58 @@ start.disabled=true;
       additionalExpensesItem.disabled = isDisabled;
       targetAmount.disabled = isDisabled;
   },
-  showButton: function() {
+  showResetButton: function() {
     appData.toDisabled(true);
-
+    // periodSelect.textContent = 1;
     start.style.display = 'none';
     cancel.style.display = 'block';
   },
- 
 reset: function() {
-  let inputs = document.querySelectorAll('input')
+  let inputs = main.querySelectorAll('input')
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = ''
+    periodSelect.value = 0
+    periodSelect.textContent = 1;
+
+    appData.toDisabled(false);
+
+    for (let i = 0; i < incomeItem.length; i++) {
+			if (i !== 0) {
+				incomeItem[i].remove();
+			}
+		}
+		incomePlus.style.display = 'block';
+		for (let i = 0; i < expensesItems.length; i++) {
+			if (i !== 0) {
+				expensesItems[i].remove();
+			}
+		}
+		expensesPlus.style.display = 'block';
+    start.style.display = 'block';
+		cancel.style.display = 'none';
+		
+    start.disabled = true;
+
+  this.budget =0,
+	this.budgetDay = 0,
+	this.budgetMonth = 0,
+	this.expensesMonth = 0,
+	this.income = {},
+	this.incomeMonth = 0,
+	this.addIncome = [],
+	this.expenses = {},
+	this.addExpenses = [],
+	this.deposit = false,
+	this.percentDeposit = 0,
+	this.moneyDeposit = 0,
+	this.period = 0
   }
-  
 }
-
 }
-  
+  start.addEventListener('click', appData.start.bind(appData));
+  cancel.addEventListener('click', appData.reset.bind(appData));
 
-  start.addEventListener('click', appData.start)
+
   expensesPlus.addEventListener('click', appData.addExpensesBlock)
   incomePlus.addEventListener('click',appData.addIncomeBlock); 
   periodSelect.addEventListener('input',appData.range); 
