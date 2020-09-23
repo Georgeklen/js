@@ -64,7 +64,6 @@ start.disabled=true;
       this.getIncome()
       this.getBudget()
       this.toDisabled()
-      this.reset()
       this.showResult()
       this.showResetButton()
      
@@ -80,7 +79,7 @@ start.disabled=true;
         additionalIncomeValue.value = this.addIncome.join(', ')
         targetMonthValue.value = Math.ceil(this.getTargetMonth())
         incomePeriodValue.value = this.calcPeriod()
-        periodSelect.addEventListener('input',this.showResult)
+       
 
 
         periodSelect.addEventListener('input', function(){
