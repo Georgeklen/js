@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', function(){
               setInterval(updateClock, 1000);
           }
 
-          if (timer <= 0) {
+          if (timer.timeRemaining <= 0) {
             clearInterval(countTimer());
           }
       }
