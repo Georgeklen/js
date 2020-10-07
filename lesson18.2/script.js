@@ -1,34 +1,59 @@
-
 let date = new Date().getHours()
 
 
 function timesDay() {
     if (date >= 5 && date < 12) {
-        console.log("Доброе утро!")
+        let div = document.createElement('div');
+        div.className = "alert";
+        div.innerHTML = "<strong>Доброе утро!</strong> ";
+
     }
     else if (date >= 12 && date < 18) {
-        console.log("Добрый день!")
+        let div = document.createElement('div');
+        div.innerHTML = "<strong>Добрый день!</strong> ";
+        document.body.append(div);
     }
     else if (date >= 18 && date < 24) {
-        console.log("Добрый вечер!")
+        let div = document.createElement('div');
+        div.innerHTML = "<strong>Добрый вечер!</strong> ";
+        document.body.append(div);
+        
     }
     else if (date >= 0 && date < 5) {
-        console.log('Доброй ночи!')
+        let div = document.createElement('div');
+        div.innerHTML = '<strong>Доброй ночи!</strong>';
+        document.body.after(div);
+
+
     }
 
 }
 
 timesDay()
+function whatDay() {
+    let days = ['Воскресенье.', 'Понедельник.', 'Вторник.', 'Среда.', 'Четверг.', 'Пятница.', 'Суббота.' ];
+    let DataDay = new Date();
+    let hour = DataDay.getDay();
+    // ("Сегодня " + days[hour]);
+    // textcontent("Сегодня " + days[hour]);
+    let p = document.createElement('p');
+    p.innerHTML = "<strong>  Сегодня </strong>" + days[hour];
+    document.body.append(p);
+}
+whatDay()
 
-  let days = ['Воскресенье.', 'Понедельник.', 'Вторник.', 'Среда.', 'Четверг.', 'Пятница.', 'Суббота.' ];
-  let DataDay = new Date();
-  let hour = DataDay.getDay();
-  console.log("Сегодня " + days[hour]);
-
-
-let now = console.log("Время сейчас " + new Date().getHours() + ":" 
-+ new Date().getMinutes() + ":" 
-+ new Date().getSeconds())
+function now() {
+    // let now = console.log("Время сейчас " + new Date().getHours() + ":" 
+    // + new Date().getMinutes() + ":" 
+    // + new Datxe().getSeconds()) 
+    let p = document.createElement('p');
+    p.innerHTML = "<strong>Текущее время:</strong> " +  new Date().getHours() + ":" 
+    + new Date().getMinutes() + ":" 
+    + new Date().getSeconds() + " PM"
+    document.body.append(p);
+    
+}
+now()
 
 
 function daysLeftNewYear() {  
@@ -45,8 +70,14 @@ function daysLeftNewYear() {
     else {
     if(daysLeft==0) {console.log("Завтра новый год!")
     } else {
-        console.log("До нового года осталось "+ daysLeft + dayname + "!")}
+        let p = document.createElement('p');
+        p.innerHTML = "<strong>До нового года осталось </strong>" +  daysLeft + dayname + "!";
+        document.body.append(p);
+        
     }
+}
     return;
   }
   daysLeftNewYear()
+
+
