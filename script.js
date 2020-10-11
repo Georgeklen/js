@@ -392,7 +392,7 @@ const calc = (price = 100) => {
 
     } 
 
-    totalValue.textContent = total;
+    totalValue.textContent = Math.ceil(total);
   }
 
 
